@@ -5,12 +5,18 @@
             <el-col :span="2" :offset="12"><el-button @click="handleQuery()">搜索</el-button></el-col>
         </el-row>
         <el-row>
-            <el-table :data="tableData">
+            <el-table :data="tableData" border>
+                <el-table-column prop="id" label="商户ID">
+                </el-table-column>
                 <el-table-column prop="name" label="姓名">
                 </el-table-column>
                 <el-table-column prop="mobile" label="手机号">
                 </el-table-column>
                 <el-table-column prop="nickname" label="昵称">
+                </el-table-column>
+                <el-table-column prop="state_desc" label="状态">
+                </el-table-column>
+                <el-table-column prop="date_joined" label="创建时间">
                 </el-table-column>
             </el-table>
         </el-row>
@@ -55,17 +61,15 @@
             },
             handleSizeChange(val) {
                 this.page_size = val;
-                console.log(`每页 ${val} 条`);
+                //console.log(`每页 ${val} 条`);
             },
             handleCurrentChange(val) {
-                console.log(`当前页: ${val}`);
+                //console.log(`当前页: ${val}`);
                 this.currentPage = val;
                 this.getUserList(val, this.page_size, this.mobile);
             },
             getUserList (page, max_num, mobile='') {
                 var _this = this;
-                console.log(_this);
-                console.log(_this.$data.tableData);
                 var query_data = new Object();
                 query_data.se_userid = 88769;
                 query_data.page = page;
@@ -78,10 +82,8 @@
                     params: query_data
                 })
                 .then(function (response) {
-                    console.log('response', response.data.num);
                     _this.$data.total = response.data.num;
                     _this.$data.tableData = response.data.info;
-                    console.log(_this.$data.tableData);
                 })
                 .catch(function (error) {
                     console.log('error', error);
@@ -100,6 +102,6 @@
         margin-bottom: 20px;
     }
     .dc-pagination{
-        margin-top: 10px;
+        margin-top: 20px;
     }
 </style>

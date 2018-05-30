@@ -54,13 +54,15 @@
   }
 
   .el-header {
-    background-color: #B3C0D1;
-    color: #333;
-    line-height: 60px;
+    background-color: #409EFF;
+    color: #fff;
+    line-height: 40px;
+	height: 40px !important;
+	border-radius: 5px;
   }
   
   .el-aside {
-    color: #333;
+    color: #ffffff;
     top: 0px;
     bottom: 0px;
     position: relative;
