@@ -16,7 +16,7 @@ import Page4 from './views/page4.vue';
 import Page5 from './views/page5.vue';
 import Page6 from './views/page6.vue';
 
-Vue.use(ElementUI, { size: 'small', zIndex: 3000 });
+Vue.use(ElementUI, { size: 'middle', zIndex: 3000 });
 Vue.use(VueRouter);
 
 const Routers = [
@@ -87,13 +87,13 @@ const RouterConfig = {
 	// 使用HTML5的Histroy路由模式
 	//mode: 'history',
 	routes: Routers
-}
+};
 
 const router = new VueRouter(RouterConfig);
 router.beforeEach((to, from, next) => {
 	window.document.title = to.meta.title;
 	next();
-})
+});
 
 // 创建Vue根实例
 new Vue({
