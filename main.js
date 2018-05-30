@@ -52,6 +52,10 @@ const Routers = [
             {path: '/page6', component: Page6, name: '选项3-2'},
         ] 
     },
+    {
+        path: '*',
+        redirect: '/main'
+    }
     /*
 	{
 		path: '/index',
@@ -74,11 +78,9 @@ const Routers = [
 		},
 		component: (resolve) => require(['./views/user.vue'], resolve)
 	},
-	{
-		path: '*',
-		redirect: '/index'
-	}
-    */
+	 */
+
+
 ];
 
 const RouterConfig = {
