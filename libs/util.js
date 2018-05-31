@@ -7,10 +7,10 @@ const Util  = {
 
 // Ajax配置
 Util.ajax = axios.create({
-    baseURL: Util.base_path
+    baseURL: Util.base_path,
 });
+Util.http = axios;
 // 添加响应拦截器
-
 Util.ajax.interceptors.response.use(res => {
     return res.data;
 });

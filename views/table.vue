@@ -23,8 +23,7 @@
                         label="操作"
                         width="100">
                     <template slot-scope="scope">
-                        <el-button @click="handleClick(scope.row)" type="text" size="small">查看</el-button>
-                        <el-button type="text" size="small">编辑</el-button>
+                        <el-button @click="handleClick(scope.row)" type="text" size="small">编辑</el-button>
                     </template>
                 </el-table-column>
             </el-table>
@@ -48,20 +47,25 @@
                 :visible.sync="dialogVisible"
                 width="30%"
                 :before-close="handleClose">
-                <el-form :model="form">
-                    <el-form-item label="活动名称" :label-width="formLabelWidth">
-                        <el-input v-model="form.name" auto-complete="off"></el-input>
-                    </el-form-item>
-                    <el-form-item label="活动区域" :label-width="formLabelWidth">
-                        <el-select v-model="form.region" placeholder="请选择活动区域">
-                            <el-option label="区域一" value="shanghai"></el-option>
-                            <el-option label="区域二" value="beijing"></el-option>
-                        </el-select>
-                    </el-form-item>
-                </el-form>
+                <el-row>
+                    <el-col>
+                        <el-form :model="form">
+                            <el-form-item label="企业名称" :label-width="formLabelWidth">
+                                <el-input v-model="form.name" auto-complete="off"></el-input>
+                            </el-form-item>
+                            <el-form-item label="店铺名称" :label-width="formLabelWidth">
+                                <el-input v-model="form.nickname" auto-complete="off"></el-input>
+                            </el-form-item>
+                            <el-form-item label="手机号" :label-width="formLabelWidth">
+                                <el-input v-model="form.mobile" auto-complete="off"></el-input>
+                            </el-form-item>
+                        </el-form>
+                    </el-col>
+                </el-row>
+
             <span slot="footer" class="dialog-footer">
                 <el-button @click="dialogVisible = false">取 消</el-button>
-                <el-button type="primary" @click="dialogVisible = false">确 定</el-button>
+                <el-button type="primary" @click="handleConfirm">确 定</el-button>
             </span>
         </el-dialog>
     </div>
@@ -80,12 +84,32 @@
                 dialogVisible: false,
                 formLabelWidth: '150px',
                 form: {
+                    nickname: '',
+                    mobile: '',
                     name: '',
-                    region: '',
+                    merchant_id: '',
                 },
             }
         },
         methods: {
+            handleConfirm(){
+                console.log('click confirm button');
+                this.dialogVisible = false;
+                Util.http({
+                    method:"post",
+                    url:Util.base_path + '/posp/v1/api/merchant/view',
+                    data:this.form,
+                    transformRequest: [function (data) {
+                        let ret = '';
+                        for (let it in data) {
+                            ret += encodeURIComponent(it) + '=' + encodeURIComponent(data[it]) + '&'
+                        }
+                        return ret
+                    }],
+                }).then((res)=>{
+                    console.log(res.data);
+                })
+            },
             handleClose(done) {
                 console.log('dialog close');
                 this.$confirm('确认关闭？')
@@ -98,6 +122,10 @@
             handleClick(row) {
                 console.log('row=', row);
                 this.dialogVisible = true;
+                this.form.nickname = row.nickname;
+                this.form.name = row.name;
+                this.form.mobile = row.mobile;
+                this.form.merchant_id = row.id;
             },
             handleQuery() {
                 console.log(this.mobile);
