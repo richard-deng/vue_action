@@ -5,7 +5,7 @@
             <el-col :span="2" :offset="12"><el-button @click="handleQuery()">搜索</el-button></el-col>
         </el-row>
         <el-row>
-            <el-table :data="tableData" border>
+            <el-table :data="tableData" border >
                 <el-table-column prop="id" label="商户ID">
                 </el-table-column>
                 <el-table-column prop="name" label="姓名">
@@ -17,6 +17,15 @@
                 <el-table-column prop="state_desc" label="状态">
                 </el-table-column>
                 <el-table-column prop="date_joined" label="创建时间">
+                </el-table-column>
+                <el-table-column
+                        fixed="right"
+                        label="操作"
+                        width="100">
+                    <template slot-scope="scope">
+                        <el-button @click="handleClick(scope.row)" type="text" size="small">查看</el-button>
+                        <el-button type="text" size="small">编辑</el-button>
+                    </template>
                 </el-table-column>
             </el-table>
         </el-row>
@@ -51,6 +60,9 @@
             }
         },
         methods: {
+            handleClick(row) {
+                console.log('row=', row);
+            },
             handleQuery() {
                 console.log(this.mobile);
                 if(this.mobile){
