@@ -43,6 +43,17 @@
                 </el-pagination>
             </el-col>
         </el-row>
+        <el-dialog
+                title="提示"
+                :visible.sync="dialogVisible"
+                width="30%"
+                :before-close="handleClose">
+            <span>这是一段信息</span>
+            <span slot="footer" class="dialog-footer">
+            <el-button @click="dialogVisible = false">取 消</el-button>
+            <el-button type="primary" @click="dialogVisible = false">确 定</el-button>
+            </span>
+        </el-dialog>
     </div>
 </template>
 
@@ -55,13 +66,23 @@
                 mobile: '',
                 currentPage: 1,
                 total: 0,
-                page_size: 10
-
+                page_size: 10,
+                dialogVisible: false
             }
         },
         methods: {
+            handleClose(done) {
+                console.log('dialog close');
+                this.$confirm('确认关闭？')
+                    .then(_ => {
+                        console.log('confirm close');
+                        done();
+                    })
+                    .catch(_ => {});
+            },
             handleClick(row) {
                 console.log('row=', row);
+                this.dialogVisible = true;
             },
             handleQuery() {
                 console.log(this.mobile);
@@ -81,8 +102,8 @@
                 this.getUserList(val, this.page_size, this.mobile);
             },
             getUserList (page, max_num, mobile='') {
-                var _this = this;
-                var query_data = new Object();
+                let _this = this;
+                let query_data = new Object();
                 query_data.se_userid = 88769;
                 query_data.page = page;
                 query_data.maxnum = max_num;
