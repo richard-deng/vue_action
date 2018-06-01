@@ -129,6 +129,7 @@
             },
             handleQuery() {
                 console.log(this.mobile);
+                console.log(this.$store.state.isLogin);
                 if(this.mobile){
                     this.getUserList(1, this.page_size, this.mobile);
                 }else{
@@ -167,6 +168,15 @@
             }
         },
         mounted () {
+            console.log(this.$store.state.isLogin);
+            if(!this.$store.state.isLogin){
+                this.$notify({
+                    title: '警告',
+                    message: '请登录',
+                    type: 'warning'
+                });
+                return false;
+            }
             this.getUserList(1, this.page_size, '');
         }
     };
