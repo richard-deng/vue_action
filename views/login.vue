@@ -1,28 +1,34 @@
 <template>
     <div  class="dc-login">
-        <el-row type="type" justify="space-between">
-            <el-col>
-                <el-form :model="form">
+        <el-container>
+            <el-header class="dc-header">
+                <label><p>请登录</p></label>
+            </el-header>
+            <el-main>
+                <el-row type="type" justify="space-between">
                     <el-col>
-                        <el-form-item label="手机号" :label-width="formLabelWidth">
-                            <el-input v-model="form.mobile" auto-complete="off"></el-input>
-                        </el-form-item>
+                        <el-form :model="form">
+                            <el-col>
+                                <el-form-item label="手机号" :label-width="formLabelWidth">
+                                    <el-input v-model="form.mobile" auto-complete="off"></el-input>
+                                </el-form-item>
+                            </el-col>
+                            <el-col>
+                                <el-form-item label="密码" :label-width="formLabelWidth">
+                                    <el-input v-model="form.password" auto-complete="off"></el-input>
+                                </el-form-item>
+                            </el-col>
+
+                        </el-form>
                     </el-col>
                     <el-col>
-                        <el-form-item label="密码" :label-width="formLabelWidth">
-                            <el-input v-model="form.password" auto-complete="off"></el-input>
-                        </el-form-item>
+                        <div class="grid-content bg-purple-light">
+                            <label><el-button class="dc-enter" @click="handleLogin">登录</el-button></label>
+                        </div>
                     </el-col>
-
-                </el-form>
-            </el-col>
-            <el-col>
-                <div class="grid-content bg-purple-light">
-                    <label><el-button class="dc-enter" @click="handleLogin">登录</el-button></label>
-                </div>
-            </el-col>
-        </el-row>
-
+                </el-row>
+            </el-main>
+        </el-container>
     </div>
 </template>
 
@@ -85,11 +91,20 @@
 </script>
 
 <style>
+    .dc-header{
+        background-color: #f5f5f5;
+        border-color: #ddd;
+    }
+    .dc-header label p{
+        color: black;
+        margin: 0;
+        font-size: 18px;
+    }
     .dc-login{
         margin:200px auto;
-        width:300px; /* 必须制定宽度 */
-        height:200px;
-        /*border: 1px solid lightgray;*/
+        width:360px; /* 必须制定宽度 */
+        height:240px;
+        border: 1px solid #ddd;
         border-radius: 4px;
     }
 
@@ -103,8 +118,9 @@
         min-height: 36px;
     }
     .dc-enter{
-        width: 240px;
-        background: lightseagreen;
+        width: 260px;
+        background-color: #5cb85c;
+        border-color: #4cae4c
     }
 
 </style>
