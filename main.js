@@ -21,6 +21,13 @@ Vue.use(VueRouter);
 
 const Routers = [
     {
+        path: '/login',
+        meta: {
+            title: '登录'
+        },
+        component: (resolve) => require(['./views/login.vue'], resolve)
+    },
+    {
         path: '/',
         component: Layout,
         name: '导航一',
@@ -52,18 +59,14 @@ const Routers = [
             {path: '/page6', component: Page6, name: '选项3-2'},
         ] 
     },
+
+    /*
     {
         path: '*',
         redirect: '/main'
-    }
-    /*
-	{
-		path: '/index',
-		meta: {
-			title: '首页'
-		},
-		component: (resolve) => require(['./views/index.vue'], resolve)
-	},
+    },
+
+
 	{
 		path: '/about',
 		meta: {

@@ -1,0 +1,108 @@
+<template>
+    <div  class="dc-login">
+        <el-row type="type" justify="space-between">
+            <el-col>
+                <el-form :model="form">
+                    <el-col>
+                        <el-form-item label="手机号" :label-width="formLabelWidth">
+                            <el-input v-model="form.mobile" auto-complete="off"></el-input>
+                        </el-form-item>
+                    </el-col>
+                    <el-col>
+                        <el-form-item label="密码" :label-width="formLabelWidth">
+                            <el-input v-model="form.password" auto-complete="off"></el-input>
+                        </el-form-item>
+                    </el-col>
+
+                </el-form>
+            </el-col>
+            <el-col>
+                <div class="grid-content bg-purple-light">
+                    <label><el-button class="dc-enter" @click="handleLogin">登录</el-button></label>
+                </div>
+            </el-col>
+        </el-row>
+
+    </div>
+</template>
+
+<script>
+    import Util from '../libs/util';
+    import md5 from 'js-md5';
+    export default {
+        data () {
+            return {
+                formLabelWidth: '60px',
+                form: {
+                    mobile: '',
+                    password: ''
+                }
+            }
+        },
+        methods: {
+            handleLogin() {
+                this.doLogin();
+            },
+            doLogin() {
+                Util.http({
+                    method:"post",
+                    url:Util.base_path + '/posp/v1/api/login',
+                    data: {
+                        mobile: this.form.mobile,
+                        password: md5(this.form.password),
+                    },
+                    transformRequest: [function (data) {
+                        let ret = '';
+                        for (let it in data) {
+                            ret += encodeURIComponent(it) + '=' + encodeURIComponent(data[it]) + '&'
+                        }
+                        return ret
+                    }],
+                }).then((res)=>{
+                    console.log(res.data);
+                    let respcd = res.data.respcd;
+                    if(respcd !== '0000') {
+                        let respmsg = res.data.respmsg;
+                        let resperr = res.data.resperr;
+                        let message = respmsg ? respmsg : resperr;
+                        console.log('error');
+                        this.$notify({
+                            title: '警告',
+                            message: message,
+                            type: 'warning'
+                        });
+                    } else {
+                        let detail_data = res.data.data;
+                        console.log(detail_data.userid);
+                    }
+
+                })
+            }
+        }
+    }
+</script>
+
+<style>
+    .dc-login{
+        margin:200px auto;
+        width:300px; /* 必须制定宽度 */
+        height:200px;
+        /*border: 1px solid lightgray;*/
+        border-radius: 4px;
+    }
+
+    .bg-purple-light {
+        /*background: lightseagreen;*/
+    }
+
+    .grid-content {
+        margin-left: 60px;
+        border-radius: 4px;
+        min-height: 36px;
+    }
+    .dc-enter{
+        width: 240px;
+        background: lightseagreen;
+    }
+
+</style>

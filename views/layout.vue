@@ -54,7 +54,7 @@
   }
 
   .el-header {
-    background-color: #409EFF;
+    background-color: lightseagreen;
     color: #fff;
     line-height: 40px;
 	height: 40px !important;
