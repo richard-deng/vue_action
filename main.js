@@ -4,6 +4,7 @@ import Vue from 'vue';
 import ElementUI from 'element-ui';
 import 'element-ui/lib/theme-chalk/index.css';
 import VueRouter from 'vue-router';
+import Vuex from 'vuex';
 import App from './app.vue';
 import Layout from './views/layout.vue';
 import Index from './views/index.vue';
@@ -17,6 +18,7 @@ import Page6 from './views/page6.vue';
 
 Vue.use(ElementUI, { size: 'middle', zIndex: 3000 });
 Vue.use(VueRouter);
+Vue.use(Vuex);
 
 const Routers = [
     {
@@ -97,9 +99,32 @@ router.beforeEach((to, from, next) => {
 	next();
 });
 
+const store = new Vuex.Store({
+   state: {
+       isLogin: false
+   },
+   mutations: {
+       enable (state) {
+           state.isLogin = true;
+       },
+       disable (state) {
+           state.isLogin = false;
+       }
+   },
+   actions: {
+       do_login(context) {
+           context.commit('enable');
+       },
+       do_logout(context) {
+           context.commit('disable');
+       }
+   }
+});
+
 // 创建Vue根实例
 new Vue({
 	el: '#app',
 	router: router,
+    store: store,
 	render: h => h(App)
 });

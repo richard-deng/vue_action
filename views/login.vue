@@ -74,6 +74,8 @@
                     } else {
                         let detail_data = res.data.data;
                         console.log(detail_data.userid);
+                        this.$store.dispatch('do_login');
+                        console.log(this.$store.state.isLogin);
                     }
 
                 })
