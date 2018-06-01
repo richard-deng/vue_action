@@ -8,7 +8,6 @@ import App from './app.vue';
 import Layout from './views/layout.vue';
 import Index from './views/index.vue';
 import About from './views/about.vue';
-import User from './views/user.vue';
 import Table from './views/table.vue';
 import Page2 from './views/page2.vue';
 import Page3 from './views/page3.vue';
