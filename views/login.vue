@@ -82,6 +82,7 @@
                         console.log(detail_data.userid);
                         this.$store.dispatch('do_login');
                         console.log(this.$store.state.isLogin);
+                        sessionStorage.setItem('user', JSON.stringify(detail_data));
                         this.$router.push({ path: '/table' });
                     }
 

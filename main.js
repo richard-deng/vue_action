@@ -94,9 +94,18 @@ const RouterConfig = {
 };
 
 const router = new VueRouter(RouterConfig);
+
 router.beforeEach((to, from, next) => {
 	window.document.title = to.meta.title;
-	next();
+    if (to.path == '/login') {
+        sessionStorage.removeItem('user');
+    }
+    let user = JSON.parse(sessionStorage.getItem('user'));
+    if (!user && to.path != '/login') {
+        next({ path: '/login' })
+    } else {
+        next()
+    }
 });
 
 const store = new Vuex.Store({
