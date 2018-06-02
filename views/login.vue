@@ -82,6 +82,7 @@
                         console.log(detail_data.userid);
                         this.$store.dispatch('do_login');
                         console.log(this.$store.state.isLogin);
+                        this.$router.push({ path: '/table' });
                     }
 
                 })
@@ -98,7 +99,7 @@
     .dc-header label p{
         color: black;
         margin: 0;
-        font-size: 18px;
+        font-size: 16px;
     }
     .dc-login{
         margin:200px auto;
@@ -120,7 +121,7 @@
     .dc-enter{
         width: 260px;
         background-color: #5cb85c;
-        border-color: #4cae4c
+        border-color: #4cae4c;
     }
 
 </style>

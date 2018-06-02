@@ -168,6 +168,7 @@
             }
         },
         mounted () {
+            /*
             console.log(this.$store.state.isLogin);
             if(!this.$store.state.isLogin){
                 this.$notify({
@@ -177,6 +178,7 @@
                 });
                 return false;
             }
+            */
             this.getUserList(1, this.page_size, '');
         }
     };
