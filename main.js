@@ -26,7 +26,8 @@ const Routers = [
         meta: {
             title: '登录'
         },
-        component: (resolve) => require(['./views/login.vue'], resolve)
+        component: (resolve) => require(['./views/login.vue'], resolve),
+        hidden: true
     },
     {
         path: '/',
@@ -96,7 +97,7 @@ const RouterConfig = {
 const router = new VueRouter(RouterConfig);
 
 router.beforeEach((to, from, next) => {
-	window.document.title = to.meta.title;
+	  //window.document.title = to.meta.title;
     if (to.path == '/login') {
         sessionStorage.removeItem('user');
     }
