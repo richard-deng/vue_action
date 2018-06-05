@@ -15,7 +15,7 @@
                             </el-col>
                             <el-col>
                                 <el-form-item label="密码" :label-width="formLabelWidth">
-                                    <el-input v-model="form.password" auto-complete="off"></el-input>
+                                    <el-input v-model="form.password" auto-complete="off" type="password"></el-input>
                                 </el-form-item>
                             </el-col>
 
