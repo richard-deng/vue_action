@@ -83,6 +83,7 @@
                         this.$store.dispatch('do_login');
                         console.log(this.$store.state.isLogin);
                         sessionStorage.setItem('user', JSON.stringify(detail_data));
+                        this.$cookies.set("sessionid", "xxx", "1d", "/", "localhost");
                         this.$router.push({ path: '/table' });
                     }
 

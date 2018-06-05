@@ -27,6 +27,7 @@
     "uglifyjs-webpack-plugin": "^1.2.5",
     "url-loader": "^1.0.1",
     "vue": "^2.5.16",
+    "vue-cookies": "^1.5.6",
     "vue-hot-reload-api": "^2.3.0",
     "vue-html-loader": "^1.2.4",
     "vue-loader": "^14.0.3",
