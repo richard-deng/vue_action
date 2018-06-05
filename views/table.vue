@@ -12,18 +12,7 @@
         </el-row>
         <el-row>
             <el-table :data="tableData" border >
-                <el-table-column prop="id" label="商户ID">
-                </el-table-column>
-                <el-table-column prop="name" label="姓名">
-                </el-table-column>
-                <el-table-column prop="mobile" label="手机号">
-                </el-table-column>
-                <el-table-column prop="nickname" label="昵称">
-                </el-table-column>
-                <el-table-column prop="state_desc" label="状态">
-                </el-table-column>
-                <el-table-column prop="date_joined" label="创建时间">
-                </el-table-column>
+                <el-table-column v-for="item in tableHead" :prop="item.key" :label="item.name"></el-table-column>
                 <el-table-column
                         fixed="right"
                         label="操作"
@@ -97,7 +86,33 @@
                 },
                 queryForm: {
                     mobile: '',
-                }
+                },
+                tableHead: [
+                    {
+                        key: 'id',
+                        name: '商户ID'
+                    },
+                    {
+                        key: 'name',
+                        name: '商户名称'
+                    },
+                    {
+                        key: 'mobile',
+                        name: '手机号'
+                    },
+                    {
+                        key: 'nickname',
+                        name: '昵称'
+                    },
+                    {
+                        key: 'state_desc',
+                        name: '状态描述'
+                    },
+                    {
+                        key: 'date_joined',
+                        name: '创建时间'
+                    }
+                ]
             }
         },
         methods: {
