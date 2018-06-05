@@ -2,7 +2,7 @@
     <div>
         <el-row>
             <el-form :model="queryForm" :inline="true">
-                <el-form-item label="商户ID">
+                <el-form-item label="登录名称">
                     <el-col><el-input v-model="queryForm.mobile" placeholder="请输入内容"></el-input></el-col>
                 </el-form-item>
                 <el-form-item>
