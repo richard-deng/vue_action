@@ -5,6 +5,7 @@ import ElementUI from 'element-ui';
 import 'element-ui/lib/theme-chalk/index.css';
 import VueRouter from 'vue-router';
 import Vuex from 'vuex';
+import VueCookies from 'vue-cookies';
 import App from './app.vue';
 import Layout from './views/layout.vue';
 import Index from './views/index.vue';
@@ -19,6 +20,7 @@ import Page6 from './views/page6.vue';
 Vue.use(ElementUI, { size: 'middle', zIndex: 3000 });
 Vue.use(VueRouter);
 Vue.use(Vuex);
+Vue.use(VueCookies);
 
 const Routers = [
     {
@@ -26,17 +28,20 @@ const Routers = [
         meta: {
             title: '登录'
         },
-        component: (resolve) => require(['./views/login.vue'], resolve)
+        component: (resolve) => require(['./views/login.vue'], resolve),
+        hidden: true
     },
     {
         path: '/',
         component: Layout,
-        name: '导航一',
+        name: '商户管理',
         iconCls: 'el-icon-message',
         children: [
+            {path: '/table', component: Table, name: '商户信息'},
+            /*
             {path: '/main', component: Index, name: '主页'},
             {path: '/about', component: About, name: '关于'},
-            {path: '/table', component: Table, name: '表格'},
+            */
         ] 
     },
     {
@@ -94,9 +99,28 @@ const RouterConfig = {
 };
 
 const router = new VueRouter(RouterConfig);
+
 router.beforeEach((to, from, next) => {
-	window.document.title = to.meta.title;
-	next();
+	  //window.document.title = to.meta.title;
+    console.log(VueCookies.get('sessionid'));
+    if (to.path == '/login') {
+        sessionStorage.removeItem('user');
+        VueCookies.remove('sessionid', '/', 'localhost');
+    }
+    /*
+    let user = JSON.parse(sessionStorage.getItem('user'));
+    if (!user && to.path != '/login') {
+        next({ path: '/login' })
+    } else {
+        next()
+    }
+    */
+    let cookie_value = VueCookies.get('sessionid');
+    if(!cookie_value && to.path != '/login') {
+        next({ path: '/login' })
+    } else {
+        next()
+    }
 });
 
 const store = new Vuex.Store({

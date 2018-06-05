@@ -1,8 +1,14 @@
 <template>
     <div>
-        <el-row class="dc-query">
-            <el-col :span="3"><el-input v-model="mobile" placeholder="请输入内容"></el-input></el-col>
-            <el-col :span="2" :offset="12"><el-button @click="handleQuery()">搜索</el-button></el-col>
+        <el-row>
+            <el-form :model="queryForm" :inline="true">
+                <el-form-item label="登录名称">
+                    <el-col><el-input v-model="queryForm.mobile" placeholder="请输入内容"></el-input></el-col>
+                </el-form-item>
+                <el-form-item>
+                    <el-col><el-button @click="handleQuery()">搜索</el-button></el-col>
+                </el-form-item>
+            </el-form>
         </el-row>
         <el-row>
             <el-table :data="tableData" border >
@@ -89,6 +95,9 @@
                     name: '',
                     merchant_id: '',
                 },
+                queryForm: {
+                    mobile: '',
+                }
             }
         },
         methods: {
@@ -128,10 +137,9 @@
                 this.form.merchant_id = row.id;
             },
             handleQuery() {
-                console.log(this.mobile);
-                console.log(this.$store.state.isLogin);
-                if(this.mobile){
-                    this.getUserList(1, this.page_size, this.mobile);
+                console.log(this.queryForm.mobile);
+                if(this.queryForm.mobile){
+                    this.getUserList(1, this.page_size, this.queryForm.mobile);
                 }else{
                     this.getUserList(1, this.page_size, '');
                 }
@@ -139,6 +147,7 @@
             handleSizeChange(val) {
                 this.page_size = val;
                 //console.log(`每页 ${val} 条`);
+                this.getUserList(1, this.page_size, '');
             },
             handleCurrentChange(val) {
                 //console.log(`当前页: ${val}`);
@@ -168,6 +177,7 @@
             }
         },
         mounted () {
+            /*
             console.log(this.$store.state.isLogin);
             if(!this.$store.state.isLogin){
                 this.$notify({
@@ -177,6 +187,7 @@
                 });
                 return false;
             }
+            */
             this.getUserList(1, this.page_size, '');
         }
     };
