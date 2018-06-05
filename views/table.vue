@@ -201,4 +201,8 @@
     .dc-pagination{
         margin-top: 20px;
     }
+    .el-table th{
+        font-size: 15px;
+        color: black;
+    }
 </style>
