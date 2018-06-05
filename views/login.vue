@@ -95,11 +95,12 @@
 
 <style>
     .dc-header{
-        background-color: #f5f5f5;
+        /*background-color: #f5f5f5;*/
+        background-color: #08BECE;
         border-color: #ddd;
     }
     .dc-header label p{
-        color: black;
+        color: #ffffff;
         margin: 0;
         font-size: 16px;
     }
@@ -122,8 +123,10 @@
     }
     .dc-enter{
         width: 260px;
-        background-color: #5cb85c;
-        border-color: #4cae4c;
+        /*background-color: #5cb85c*/;
+        background-color: #08BECE;
+        /*border-color: #4cae4c;*/
+        color: #ffffff;
     }
 
 </style>
