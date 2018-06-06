@@ -27,7 +27,7 @@
 		      	  <el-dropdown-item command="logout">注销</el-dropdown-item>
 		        </el-dropdown-menu>
 		      </el-dropdown>
-		      <span>王小虎</span>
+		      <span>DC</span>
 		    </el-header>
 		    
 		    <el-main>
