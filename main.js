@@ -6,6 +6,8 @@ import 'element-ui/lib/theme-chalk/index.css';
 import VueRouter from 'vue-router';
 import Vuex from 'vuex';
 import VueCookies from 'vue-cookies';
+import Raven from 'raven-js';
+import RavenVue from 'raven-js/plugins/vue';
 import App from './app.vue';
 import Layout from './views/layout.vue';
 import Index from './views/index.vue';
@@ -144,6 +146,8 @@ const store = new Vuex.Store({
        }
    }
 });
+
+Raven.config('http://8d1e8752db0f4f439c50b5cd94b40aed@192.168.0.7:9000/14').addPlugin(RavenVue, Vue).install();
 
 // 创建Vue根实例
 new Vue({
