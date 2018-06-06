@@ -27,7 +27,7 @@
 		      	  <el-dropdown-item command="logout">注销</el-dropdown-item>
 		        </el-dropdown-menu>
 		      </el-dropdown>
-		      <span>王小虎</span>
+		      <span>DC</span>
 		    </el-header>
 		    
 		    <el-main>
@@ -69,11 +69,12 @@
   }
 
   .el-header {
-    background-color: lightseagreen;
+    /*background-color: lightseagreen;*/
+    background-color: #08BECE;
     color: #fff;
     line-height: 40px;
 	height: 40px !important;
-	border-radius: 5px;
+	border-radius: 3px;
   }
   
   .el-aside {
